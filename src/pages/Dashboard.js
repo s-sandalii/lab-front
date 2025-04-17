@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/*import React, { useState, useEffect } from 'react';
 // 🛠 Change to wildcard import for debugging
 import * as dashboardApi from '../api/dashboardApi';
 
@@ -85,6 +85,51 @@ const Dashboard = () => {
         <div className="col-12">
           <MaterialOverview />
         </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
+*/ 
+
+import React, { useState, useEffect } from 'react';
+import { getDashboardStats } from '../api/dashboardApi';
+
+const Dashboard = () => {
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        console.log('Fetching stats...');
+        setLoading(true);
+        const response = await getDashboardStats();
+        console.log('API Response:', response); // Debugging line
+        setStats(response.data);
+      } catch (err) {
+        console.error('Error fetching dashboard stats:', err);
+        setError('Failed to load dashboard statistics');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  if (loading) return <div className="text-center py-5">Loading dashboard...</div>;
+  if (error) return <div className="alert alert-danger">{error}</div>;
+  if (!stats) return null;
+
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <div>
+        <h2>Active Batches: {stats.activeBatchCount}</h2>
+        <h2>Success Rate: {stats.overallSuccessRate}%</h2>
       </div>
     </div>
   );
