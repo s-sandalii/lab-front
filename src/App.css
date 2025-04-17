@@ -1,12 +1,12 @@
 :root {
-  --primary-color: #46ed3a;
-  --secondary-color: #26a412;
+  --primary-color: #28a745; /* Green */
+  --secondary-color: #218838; /* Darker Green */
   --light-gray: #f8f9fa;
   --dark-gray: #343a40;
   --white: #ffffff;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
+  --success: #28a745; /* Green */
+  --warning: #ffc107;
+  --danger: #dc3545;
 }
 
 body {
@@ -35,7 +35,7 @@ body {
 }
 
 .card-header {
-  background-color: rgba(124, 58, 237, 0.05);
+  background-color: rgba(40, 167, 69, 0.1); /* Light Green */
   border-bottom: 1px solid rgba(124, 58, 237, 0.2);
   padding: 12px 20px;
   font-weight: 600;
@@ -69,8 +69,8 @@ body {
 }
 
 .alert-low-stock {
-  background-color: rgba(239, 68, 68, 0.1);
-  border-left: 4px solid var(--danger);
+  background-color: rgba(40, 167, 69, 0.1); /* Light Green */
+  border-left: 4px solid var(--primary-color);
 }
 
 .chart-container {
