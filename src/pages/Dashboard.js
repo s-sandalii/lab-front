@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { getDashboardStats } from '../api/dashboardApi';
+// 🛠 Change to wildcard import for debugging
+import * as dashboardApi from '../api/dashboardApi';
+
 import StatCard from '../components/dashboard/StatCard';
 import GrowthStatusChart from '../components/dashboard/GrowthStatusChart';
 import ContaminationChart from '../components/dashboard/ContaminationChart';
 import MaterialOverview from '../components/dashboard/MaterialOverview';
 import StockAlert from '../components/inventory/StockAlert';
+
+// 🔍 Log what’s actually coming from dashboardApi.js
+console.log('dashboardApi ===>', dashboardApi);
 
 const Dashboard = () => {
   const [stats, setStats] = useState(null);
@@ -15,7 +20,9 @@ const Dashboard = () => {
     const fetchStats = async () => {
       try {
         setLoading(true);
-        const response = await getDashboardStats();
+
+        // 🛠 Use wildcard reference to call the function
+        const response = await dashboardApi.getDashboardStats();
         setStats(response.data);
       } catch (err) {
         console.error('Error fetching dashboard stats:', err);
@@ -35,9 +42,9 @@ const Dashboard = () => {
   return (
     <div className="container">
       <h1 className="mb-4">Lab Dashboard</h1>
-      
+
       <StockAlert />
-      
+
       <div className="dashboard-row">
         <StatCard 
           title="Active Batches" 
@@ -64,7 +71,7 @@ const Dashboard = () => {
           color="#3b82f6"
         />
       </div>
-      
+
       <div className="row mb-4">
         <div className="col-md-8">
           <GrowthStatusChart />
@@ -73,7 +80,7 @@ const Dashboard = () => {
           <ContaminationChart />
         </div>
       </div>
-      
+
       <div className="row">
         <div className="col-12">
           <MaterialOverview />
