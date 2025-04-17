@@ -1,4 +1,3 @@
-// Mock data
 const MOCK_BATCHES = [
   {
     id: 1,
